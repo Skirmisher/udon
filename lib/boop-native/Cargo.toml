@@ -1,0 +1,14 @@
+[package]
+name = "boop-native"
+version = "0.0.1"
+authors = ["the boop contributors"]
+edition = "2018"
+
+[features]
+default = []
+wasapi = ["windows"]
+
+[target.'cfg(all(target_os = "windows"))'.build-dependencies]
+windows = { version = "0.11", optional = true }
+[target.'cfg(all(target_os = "windows"))'.dependencies]
+windows = { version = "0.11", optional = true }
