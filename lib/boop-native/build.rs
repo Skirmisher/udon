@@ -18,6 +18,7 @@ fn main() {
                     },
                 },
                 System::{
+                    Com::{CoInitializeEx, CoCreateInstance, CoTaskMemFree, CoUninitialize, CLSCTX, COINIT},
                     Threading::{CreateEventW, WaitForSingleObjectEx, WAIT_RETURN_CAUSE},
                     WindowsProgramming::INFINITE,
                 },
