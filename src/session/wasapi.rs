@@ -18,7 +18,7 @@ use native::winapi::{
             },
         },
         System::{
-            Threading::{CreateEventW, WaitForSingleObjectEx},
+            Threading::{CreateEventW, WaitForSingleObjectEx, WAIT_FAILED},
             WindowsProgramming::INFINITE,
         },
     },
@@ -270,7 +270,7 @@ impl OutputStream {
                 loop {
                     // Wait for WASAPI wake up the thread when it wants us to send more samples
                     match WaitForSingleObjectEx(self.event_handle, INFINITE, false) {
-                        // TODO: Why the fuck is WAIT_FAILED missing from the namespace?
+                        x if x == WAIT_FAILED => return Err(Error::Unknown),
                         _ => (),
                     };
 
@@ -305,7 +305,7 @@ impl OutputStream {
             while silent_frames < buffer_frame_count {
                 // Wait for WASAPI wake up the thread when it wants us to send more samples
                 match WaitForSingleObjectEx(self.event_handle, INFINITE, false) {
-                    // TODO: Why the fuck is WAIT_FAILED not generating?
+                    x if x == WAIT_FAILED => return Err(Error::Unknown),
                     _ => (),
                 };
 

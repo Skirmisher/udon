@@ -18,7 +18,7 @@ fn main() {
                     },
                 },
                 System::{
-                    Threading::{CreateEventW, WaitForSingleObjectEx},
+                    Threading::{CreateEventW, WaitForSingleObjectEx, WAIT_RETURN_CAUSE},
                     WindowsProgramming::INFINITE,
                 },
             },
