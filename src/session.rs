@@ -28,6 +28,7 @@ macro_rules! sessions {
 
         /// Represents a native API to create [`Session`] instances in.
         #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+        #[non_exhaustive]
         pub enum Api {
             $( $(#[$outer])* $variant ),*
         }
@@ -52,6 +53,9 @@ macro_rules! sessions {
 }
 
 sessions! {
+    /// Dummy (no-op backend)
+    dummy => Dummy,
+
     /// Windows Audio Session API (WASAPI)
     wasapi => Wasapi if all(target_os = "windows", feature = "wasapi"),
 }
