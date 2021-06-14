@@ -13,7 +13,7 @@ include = ["src/**/*", "Cargo.toml"]
 members = ["ffi"]
 
 [dependencies]
-ffi = { package = "udon-native", path = "ffi" }
+ffi = { package = "udon-ffi", path = "ffi" }
 
 [features]
 default = ["wasapi"] # TODO: "if platform" also readd alsa
