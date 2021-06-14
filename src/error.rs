@@ -12,6 +12,8 @@ pub enum Error {
     /// The requested API is not available on this system
     ApiNotAvailable,
 
+    SystemResources,
+
     /// An error unknown to this crate has been reported by the host
     Unknown,
 }
