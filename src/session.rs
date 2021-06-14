@@ -6,6 +6,18 @@ pub mod consts;
 pub type ChannelCount = NonZeroU16;
 pub type SampleRate = NonZeroU32;
 
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub enum SampleType {
+    // /// Unsigned 16-bit integer PCM
+    // U16,
+
+    /// Signed 16-bit integer PCM
+    I16,
+
+    /// IEEE 754 32-bit float PCM
+    F32,
+}
+
 /// Generates API-specific repetitive stuff for sessions and all associated types.
 macro_rules! sessions {
     (
