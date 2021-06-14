@@ -1,7 +1,7 @@
 [package]
-name = "boop-native"
+name = "udon-native"
 version = "0.0.1"
-authors = ["the boop contributors"]
+authors = ["the udon contributors"]
 edition = "2018"
 
 [features]

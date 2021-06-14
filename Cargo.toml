@@ -1,26 +1,22 @@
 [package]
-name = "boop"
+name = "udon"
 version = "0.0.1"
-authors = ["the boop contributors"]
+authors = ["the udon contributors"]
 edition = "2018"
 description = "Audio playback library designed with game engines in mind"
-repository = "https://github.com/Adamcake/Kou/"
+repository = "https://github.com/Adamcake/Kou/" # todo: No
 license = "GPL-2.0-only"
 keywords = ["audio", "gamedev", "playback"]
 include = ["src/**/*", "Cargo.toml"]
 
 [workspace]
-members = ["lib/boop-native"]
+members = ["ffi"]
 
 [dependencies]
-native = { package = "boop-native", path = "lib/boop-native" }
+ffi = { package = "udon-native", path = "ffi" }
 
 [features]
-default = ["wasapi", "alsa"] # TODO: "if platform"
-alsa = ["alsa_rs"]
-wasapi = ["native/wasapi"]
+default = ["wasapi"] # TODO: "if platform" also readd alsa
+# alsa = ["alsa_rs"]
+wasapi = ["ffi/wasapi"]
 wav = []
-
-# TODO: move to native
-[target.'cfg(any(target_os = "dragonfly", target_os = "freebsd", target_os = "linux"))'.dependencies]
-alsa_rs = { package = "alsa", version = "0.5", optional = true }
