@@ -8,15 +8,21 @@
 use super::{ChannelCount, SampleRate};
 
 macro_rules! nonzero_consts {
-    ( $( $t:ty { $( $(#[$outer:meta])* $name:ident = $val:literal ),* $(,)? } ),* $(,)? ) => {
+    (
+        $( $t:ident ( $listname:ident ) {
+            $( $(#[$outer:meta])* $name:ident = $val:literal ),* $(,)?
+        } ),* $(,)?
+    ) => {
         $(
-            $( $(#[$outer])* pub const $name: $t = unsafe { <$t> :: new_unchecked($val) }; )*
+            $( $(#[$outer])* pub const $name: $t = unsafe { <$t>::new_unchecked($val) }; )*
+            #[allow(dead_code)]
+            pub(crate) const $listname: &[$t] = &[$($name),*];
         )*
     };
 }
 
 nonzero_consts! {
-    ChannelCount {
+    ChannelCount(COMMON_CHANNEL_COUNTS) {
         /// One channel ("mono")
         CH_MONO = 1,
 
@@ -24,7 +30,7 @@ nonzero_consts! {
         CH_STEREO = 2,
     },
 
-    SampleRate {
+    SampleRate(COMMON_SAMPLE_RATES) {
         /// 8,000Hz
         SR_8000 = 8000,
 
