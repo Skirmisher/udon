@@ -1,6 +1,6 @@
 [package]
 name = "udon-native"
-version = "0.0.1"
+version = "0.0.1-alpha.1"
 authors = ["the udon contributors"]
 edition = "2018"
 

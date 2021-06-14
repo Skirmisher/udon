@@ -1,11 +1,11 @@
 [package]
 name = "udon"
-version = "0.0.1"
+version = "0.0.1-alpha.1"
 authors = ["the udon contributors"]
 edition = "2018"
 description = "Audio playback library designed with game engines in mind"
 repository = "https://github.com/Adamcake/Kou/" # todo: No
-license = "GPL-2.0-only"
+license = "Apache-2.0"
 keywords = ["audio", "gamedev", "playback"]
 include = ["src/**/*", "Cargo.toml"]
 
