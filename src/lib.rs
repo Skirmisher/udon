@@ -9,7 +9,8 @@ pub mod source;
 #[cfg(feature = "wav")]
 pub mod wav;
 
-use crate::source::{ChannelCount, Sample, SampleRate, Source};
+use crate::source::{Sample, Source};
+use crate::session::{ChannelCount, SampleRate};
 
 /// A basic sound-playing object. When fed to an output stream, will play the samples it contains until it has no more.
 /// If the samples have a different sample rate than the output stream, the output will sound sped up or slowed down.

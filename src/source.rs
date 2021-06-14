@@ -1,10 +1,7 @@
+use crate::session::{ChannelCount, SampleRate};
 use std::num::{NonZeroU16, NonZeroU32};
 
-pub type ChannelCount = NonZeroU16;
 pub type Sample = f32;
-pub type SampleRate = NonZeroU32;
-
-pub mod consts;
 
 /// Trait for a source of audio that outputs PCM at a given sample rate.
 pub trait Source {

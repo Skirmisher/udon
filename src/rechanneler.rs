@@ -1,4 +1,4 @@
-use crate::source::{ChannelCount, Sample, SampleRate, Source};
+use crate::{session::{ChannelCount, SampleRate}, source::{Sample, Source}};
 
 /// Converts the number of channels in a Source to the target channel count.
 ///

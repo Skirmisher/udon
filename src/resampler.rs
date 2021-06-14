@@ -1,4 +1,4 @@
-use crate::source::{ChannelCount, Sample, SampleRate, Source};
+use crate::{session::{ChannelCount, SampleRate}, source::{Sample, Source}};
 
 /// Implementation of a PQF resampler. Construct with: Resampler::new(source, source_rate, dest_rate)
 /// Once constructed, it will behave as a Source object which outputs samples at the target sample rate.
@@ -241,7 +241,7 @@ impl<S> Resampler<S> where S: Source {
                     None => (channel, kaiser_offset - (sample_index / channels)),
                 }
             };
-    
+
             let filter_skip_2 = {
                 match sample_index.checked_sub(kaiser_offset * channels + self.buffer_size) {
                     Some(x) => x,

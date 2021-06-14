@@ -1,4 +1,4 @@
-use crate::{Sample, source::{ChannelCount, SampleRate, Source}};
+use crate::{session::{ChannelCount, SampleRate}, source::{Sample, Source}};
 use std::sync::mpsc::{self, Receiver, Sender};
 
 const INIT_CAPACITY: usize = 16;
@@ -29,10 +29,10 @@ pub enum Error {
 
 impl Mixer {
     /// Constructs a new Mixer and MixerHandle.
-    /// 
+    ///
     /// `Mixer` does not make any changes to the channel count or sample rate of its Sources. As such, it needs to know
     /// its expected output rate and channel count on construction.
-    /// 
+    ///
     /// If Sources with a different sample rate or channel count than this are subsequently added to the Mixer,
     /// they will sound wrong. For resampling and rechanneling, see `Resampler` and `Rechanneler`.
     pub fn new(sample_rate: SampleRate, channels: ChannelCount) -> (Self, MixerHandle) {

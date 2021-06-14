@@ -1,4 +1,4 @@
-use crate::{error::Error, source::{ChannelCount, SampleRate, Source}, session::{self, SampleFormat}};
+use crate::{error::Error, source::{ChannelCount, SampleRate, Source}, sessiona::{self, SampleFormat}};
 use std::{mem, ptr::{self, NonNull}, slice};
 
 use native::winapi::{
@@ -89,10 +89,10 @@ pub struct OutputStream {
 // }
 
 impl OutputStream {
-    pub fn new(device: session::Device) -> Result<session::OutputStream, Error> {
+    pub fn new(device: sessiona::Device) -> Result<sessiona::OutputStream, Error> {
         #[allow(irrefutable_let_patterns)] // TODO: yeah only wasapi right now
         unsafe {
-            if let session::Device(session::DeviceImpl::Wasapi(device)) = device {
+            if let sessiona::Device(sessiona::DeviceImpl::Wasapi(device)) = device {
                 // TODO: `Box::try_new` once `allocator_api` hits
                 session_wrap!(Self::new_(device), OutputStream(OutputStreamImpl), Wasapi)
             } else {
@@ -117,14 +117,14 @@ impl Session {
         todo!()
     }
 
-    pub fn default_output_device(&self) -> Result<session::Device, Error> {
+    pub fn default_output_device(&self) -> Result<sessiona::Device, Error> {
         session_wrap!(Device::default_output(), Device(DeviceImpl), Wasapi)
     }
 
     pub fn open_output_stream(
         &self,
-        device: session::Device,
-    ) -> Result<session::OutputStream, Error> {
+        device: sessiona::Device,
+    ) -> Result<sessiona::OutputStream, Error> {
         OutputStream::new(device)
     }
 }

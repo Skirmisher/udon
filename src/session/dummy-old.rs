@@ -1,4 +1,4 @@
-use crate::{error::Error, session, source::{self, ChannelCount, SampleRate, Source}};
+use crate::{error::Error, sessiona, source::{self, ChannelCount, SampleRate, Source}};
 
 pub struct Device;
 pub struct OutputStream;
@@ -19,14 +19,14 @@ impl Session {
         Ok(Self)
     }
 
-    pub fn default_output_device(&self) -> Result<session::Device, Error> {
+    pub fn default_output_device(&self) -> Result<sessiona::Device, Error> {
         session_wrap!(Ok(Device), Device(DeviceImpl), Dummy)
     }
 
     pub fn open_output_stream(
         &self,
-        _device: session::Device,
-    ) -> Result<session::OutputStream, Error> {
+        _device: sessiona::Device,
+    ) -> Result<sessiona::OutputStream, Error> {
         session_wrap!(Ok(OutputStream), OutputStream(OutputStreamImpl), Dummy)
     }
 }

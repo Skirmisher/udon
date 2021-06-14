@@ -1,4 +1,4 @@
-use crate::source::{ChannelCount, Sample, SampleRate, Source};
+use crate::{session::{ChannelCount, SampleRate}, source::{Sample, Source}};
 use std::{
     marker::PhantomData,
     sync::{Arc, Condvar, Mutex},
