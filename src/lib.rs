@@ -5,6 +5,7 @@ pub mod rechanneler;
 pub mod resampler;
 pub mod session;
 pub mod source;
+pub(crate) mod sync;
 
 #[cfg(feature = "wav")]
 pub mod wav;
