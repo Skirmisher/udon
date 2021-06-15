@@ -6,8 +6,8 @@ pub enum Error {
     /// The device doesn't support any of the playback configurations we can use
     DeviceNotUsable,
 
-    /// There is no output device available
-    NoOutputDevice,
+    /// There is no device available
+    NoDeviceAvailable,
 
     /// The requested API is not available on this system
     ApiNotAvailable,

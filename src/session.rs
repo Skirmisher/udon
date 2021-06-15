@@ -7,6 +7,12 @@ pub type ChannelCount = NonZeroU16;
 pub type SampleRate = NonZeroU32;
 
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub enum DeviceType {
+    Input,
+    Output,
+}
+
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub enum SampleType {
     // /// Unsigned 16-bit integer PCM
     // U16,
@@ -33,6 +39,21 @@ macro_rules! sessions {
             $( $(#[$outer])* $variant ),*
         }
 
+        pub struct Device(pub(crate) DeviceImpl);
+        pub enum DeviceImpl {
+            $( $(#[cfg($cfg)])* $variant ( $mod::Device ) ),*
+        }
+        impl Device {
+            pub fn speak(&self) {
+                match self.0 {
+                    $(
+                        $(#[cfg($cfg)])*
+                        DeviceImpl::$variant(ref imp) => imp.speak()
+                    ),*,
+                }
+            }
+        }
+
         pub struct Session(pub(crate) SessionImpl);
         pub enum SessionImpl {
             $( $(#[cfg($cfg)])* $variant ( $mod::Session ) ),*
@@ -48,7 +69,22 @@ macro_rules! sessions {
                     }),*,
                 }
             }
+
+            pub fn default_device(&self, device_type: DeviceType) -> Result<Device, Error> {
+                match self.0 {
+                    $(
+                        $(#[cfg($cfg)])*
+                        SessionImpl::$variant(ref imp) => imp.default_device(device_type)
+                    ),*,
+                }
+            }
         }
+    };
+}
+
+macro_rules! rewrap_impl {
+    ($variant:ident, $ty:ident, $enum_ty:ident, $inner:expr) => {
+        crate::session::$ty(crate::session::$enum_ty::$variant($inner))
     };
 }
 

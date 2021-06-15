@@ -34,7 +34,6 @@ fn main() {
                         CreateEventW, CreateThread, SetThreadPriority, WaitForSingleObjectEx,
                         THREAD_PRIORITY, WAIT_RETURN_CAUSE,
                     },
-                    SystemServices::RTL_CONDITION_VARIABLE,
                     WindowsProgramming::INFINITE,
                 },
             },
