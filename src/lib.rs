@@ -1,4 +1,4 @@
-pub mod buffer;
+//pub mod buffer;
 mod error;
 pub mod mixer;
 pub mod rechanneler;
@@ -52,5 +52,9 @@ impl Source for Player {
         } else {
             0
         }
+    }
+
+    fn reset(&mut self) {
+        self.offset = 0;
     }
 }

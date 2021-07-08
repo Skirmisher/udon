@@ -76,6 +76,10 @@ impl Source for Mixer {
     fn sample_rate(&self) -> SampleRate {
         self.sample_rate
     }
+
+    fn reset(&mut self) {
+        self.sources.clear()
+    }
 }
 
 impl MixerHandle {
